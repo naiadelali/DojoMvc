@@ -1,0 +1,27 @@
+﻿@model DojoMvc.Ui.Models.ProductCadastroModel
+@using System.ComponentModel.DataAnnotations;
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>New</h2>
+@using (Html.BeginForm("Save", "Product", FormMethod.Post))
+{
+    <div class="editor-label">
+        @Html.LabelFor(obj => obj.Name)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(obj => obj.Name)
+        @Html.ValidationMessageFor(obj => obj.Name)
+    </div>
+    
+    <div class="editor-label">
+        @Html.LabelFor(obj => obj.Price)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(obj => obj.Price)
+        @Html.ValidationMessageFor(obj => obj.Price)
+    </div>
+    <input type="submit" name="save" value="Save" />
+}
+

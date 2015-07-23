@@ -1,0 +1,34 @@
+﻿@model DojoMvc.Ui.Models.ProductModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@using(Html.BeginForm("Index","Product",FormMethod.Post))
+{
+    @Html.DropDownListFor(obj=>obj.Filter, new SelectList(Model.ListOfFilters))
+    <input type="Submit" name="name" value="Filtrar" />
+
+}
+
+
+@Html.ActionLink("Novo","Novo","Product")
+
+@using GridMvc.Html;
+@Html.Grid(Model.ListaDeProduto).Columns(c =>
+        {
+            c.Add()
+                .Sanitized(false)
+                .Encoded(false)
+                .RenderValueAs(obj => Html.ActionLink("Edit", "Edit", "Product", new {id=obj.id },null).ToHtmlString());
+            c.Add(obj => obj.id);
+            c.Add(obj => obj.name);
+            c.Add(obj => obj.price);
+            c.Add()
+                .Sanitized(false)
+                .Encoded(false)
+                .RenderValueAs(obj => Html.ActionLink("Delete", "DeleteProduct", "Product", new { id = obj.id }, null));
+
+        }
+)
